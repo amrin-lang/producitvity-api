@@ -24,6 +24,30 @@ router.post("/users",(req,res)=>{
   })
 })
 
+//update user -> update password
+//users/amreen123
+router.put("/users/:username",(req,res)=>{
+  const username = req.params.username;
+  //2 paramters for PUT 
+  //param1 - username
+  //param2 - new password
+  userController.put(username,req.body)
+  .then((data) => {
+    res.json({
+      confirmation: "success",
+      data: data
+    })
+  })
+  .catch((error) => {
+    return res.status(400).json({
+      confirmation: "fail",
+      error: error.message
+    })
+  })
+
+})
+
+
 //GET, POST, PUT, DELETE, PATCH
 router.post('/', (req, res) => {
   console.log(req.body);

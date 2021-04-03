@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 //type, required, minlength, default, maxlength, enum
 const userSchema = mongoose.Schema({
-  email: {
+  username: {
     type: String,
-    required: [true, "User email is required"],
+    required: [true, "Username is required"],
     default: ''
   },
 
