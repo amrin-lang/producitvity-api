@@ -4,13 +4,12 @@ const userSchema = mongoose.Schema({
   username: {
     type: String,
     required: [true, "Username is required"],
-    default: ''
+    unique: true
   },
 
-  password_hash:{
+  password:{
     type: String,
     required: [true, "user password is required"],
-    default: ""
   },
 
   recovery_code:{
