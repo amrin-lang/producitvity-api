@@ -51,8 +51,7 @@ module.exports = {
         reject(error);
       }
     
-      
-
+    
 
       //encrypt the password using sha256
       param2.password = crypto

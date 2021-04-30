@@ -67,6 +67,22 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.post("/users/:user_id/tasks", (req,res)=>{
+  TaskController
+    .post(req.body)
+    .then((data) => {
+      res.status(200).json({
+        confirmation: "success",
+        data: data,
+      });
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        confirmation: "fail",
+        error: error.message,
+      });
+    });
+})
 
 //GET, POST, PUT, DELETE, PATCH
 router.post('/', (req, res) => {

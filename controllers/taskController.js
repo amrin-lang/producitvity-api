@@ -1,0 +1,25 @@
+const { model } = require('mongoose')
+const { resolveContent } = require('nodemailer/lib/shared')
+const Task = require('../models/Task')
+model.exports = {
+    get: (params)=>{},
+
+
+    //
+    post: (params) =>{
+        return new Promise((resolev, reject)=>{
+            Task.create(params).then((data)=> resolveContent(data))
+            .catch((error) => reject(error));
+        })
+    },
+
+
+    //FIND something that has param1 , change it to param2
+    put: (param1, param2)=>{
+
+    },
+
+    delete: (param)=>{
+
+    },
+}
