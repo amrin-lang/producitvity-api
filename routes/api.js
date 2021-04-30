@@ -48,6 +48,26 @@ router.put("/users/:username",(req,res)=>{
 })
 
 
+
+//authenticate 
+router.post("/login", (req, res) => {
+  userController
+    .login(req.body)
+    .then((data) => {
+      res.status(200).json({
+        confirmation: "success",
+        data: data,
+      });
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        confirmation: "fail",
+        error: error.message,
+      });
+    });
+});
+
+
 //GET, POST, PUT, DELETE, PATCH
 router.post('/', (req, res) => {
   console.log(req.body);
@@ -64,8 +84,9 @@ router.post('/', (req, res) => {
       
       
 
-      break;
-    
+    break;
+
+
     // case "authenticate_user":
     //   const authenticate_user_data = {
     //     email: req.body.email,

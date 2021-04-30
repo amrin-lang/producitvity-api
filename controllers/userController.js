@@ -71,6 +71,50 @@ module.exports = {
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     });
+  },
+
+  login: (params) =>{
+    return new Promise((resolve,reject)=>{
+
+      //validate if the username is provided
+      if(!params.username){
+        const error = {message: "Username is required"};
+        reject(error);
+      }
+
+      //validate to check if the passowrd exists | it DOESN'T check if it's right
+      if(!params.password){
+        const error = {message: "Password is required"};
+        reject(error);
+      }
+
+      //encrypt your password
+      params.password = crypto
+      .createHash("sha256")
+      .update(params.password)
+      .digest("hex")
+
+      //abcd, 1234
+
+      //Check to see if user is given credentials exists in the database.
+      User.findOne(params, {password: false})
+      .then((data)=>{
+
+        //check if you got anything back
+        //select * from user where username = `user_username` AND password ='given password'
+        if(!data){
+          const error ={
+            message: "User with given credentials does not exist"
+          };
+          reject(error);
+
+        }
+
+        //if you reach here, then it means you got something back
+        resolve(data);
+      }).catch((error)=> reject(error))
+
+    })
   }
 
 }
