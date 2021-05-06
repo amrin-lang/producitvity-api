@@ -1,17 +1,13 @@
 const mongoose = require('mongoose')
 //type, required, minlength, default, maxlength, enum
-const userSchema = mongoose.Schema({
-  username: {
-    type: String,
-    required: [true, "Username is required"],
-    unique: true
-  },
+const taskSchema = mongoose.Schema({
+  user_id: 
+    //referencing the userID from user.js
+    {type: mongoose.Schema.ObjectId, ref:"User"},
+    
+  
 
-  tasks:[{
-    task_id:{
-      type: String,
-      required:[true,"task id needed"]
-    },
+    
 
     title:{
       type: String,
@@ -29,7 +25,7 @@ const userSchema = mongoose.Schema({
 
     reminder:{
       type: Date,
-      required:[true, "user needs to enter reminder time"]      
+      //optional    
     },
 
     list_type:{
@@ -41,7 +37,7 @@ const userSchema = mongoose.Schema({
     timestamp_marked_complete:{
       type: Date
     }
-  }]
+  
 
 })
 
