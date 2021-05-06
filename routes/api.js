@@ -2,6 +2,7 @@ const express = require("express")
 const randomString = require("randomstring")
 const nodemailer = require("nodemailer")
 const userController = require("../controllers/userController")
+const taskController = require("../controllers/taskController")
 
 //creating the router
 const router = express.Router()
@@ -10,6 +11,23 @@ const router = express.Router()
 router.post("/users",(req,res)=>{
   console.log(req.body)
   userController.post(req.body)
+  .then((data) => {
+    res.json({
+      confirmation: "success",
+      data: data
+    })
+  })
+  .catch((error) => {
+    return res.status(400).json({
+      confirmation: "fail",
+      error: error.message
+    })
+  })
+})
+
+router.get("/users",(req,res)=>{
+  //console.log(req.body)
+  userController.get(req.params)
   .then((data) => {
     res.json({
       confirmation: "success",
@@ -68,7 +86,10 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/users/:user_id/tasks", (req,res)=>{
-  TaskController
+  //add user_id to the body of task:
+  req.body.user_id = req.params.user_id
+  console.log(req.body)
+  taskController
     .post(req.body)
     .then((data) => {
       res.status(200).json({
