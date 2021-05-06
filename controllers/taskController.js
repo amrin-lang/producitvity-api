@@ -1,14 +1,14 @@
 const { model } = require('mongoose')
 const { resolveContent } = require('nodemailer/lib/shared')
 const Task = require('../models/Task')
-model.exports = {
+module.exports = {
     get: (params)=>{},
 
 
-    //
+    //create a new task
     post: (params) =>{
-        return new Promise((resolev, reject)=>{
-            Task.create(params).then((data)=> resolveContent(data))
+        return new Promise((resolve, reject)=>{
+            Task.create(params).then((data)=> resolve(data))
             .catch((error) => reject(error));
         })
     },
@@ -23,3 +23,4 @@ model.exports = {
 
     },
 }
+
