@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 //type, required, minlength, default, maxlength, enum
 const userSchema = mongoose.Schema({
-  user_id: {
-    type: Schema.Types.ObjectId,
+  username: {
+    type: String,
     ref: "User",
     required: [true, "Username is required"],
   },

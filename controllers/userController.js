@@ -27,6 +27,16 @@ module.exports = {
     })
   },
 
+  get: (params) => {
+    return new Promise((resolve, reject) => {
+
+      //then create your user
+      User.find(params)
+      .then((data) => resolve(data))
+      .catch((error) => reject(error))
+    })
+  },
+
   //update param2 WHERE id is param1
   //param1 is username
   //param2 is new password 
